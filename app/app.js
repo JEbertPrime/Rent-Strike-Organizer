@@ -33,8 +33,19 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-// Create redux store with history
-const initialState = {};
+// Create redux store with history and check for auth token
+const userToken = localStorage.getItem('jwtToken');
+const isAuth = !!userToken;
+const initialState = {
+  global: {
+    loading: false,
+    error: false,
+    landlords: [],
+    landlord: { name: '', numTenants: 0, location: [] },
+    userToken,
+    isAuth,
+  },
+};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 

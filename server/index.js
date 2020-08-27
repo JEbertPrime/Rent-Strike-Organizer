@@ -2,6 +2,12 @@
 
 const express = require('express');
 const logger = require('./logger');
+const db = require('./database/db');
+const landlordRouter = require('./routes/landlord-router');
+const userRouter = require('./routes/user-router');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const passport = require('passport');
 
 const argv = require('./argv');
 const port = require('./port');
@@ -16,6 +22,17 @@ const app = express();
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.json());
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require('./config/passport')(passport);
+// routes
+app.use('/api', landlordRouter);
+app.use('/api', userRouter);
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
