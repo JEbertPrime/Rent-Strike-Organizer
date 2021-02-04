@@ -10,7 +10,7 @@ const Landlord = new Schema(
       required: true,
     },
     location: { type: [String], required: true },
-    numTenants: { type: Number, required: true },
+    numTenants: { type: Number },
     comments: [
       {
         userId: 'string',

@@ -1,9 +1,11 @@
 const Landlord = require('../models/landlord-model');
 const validateLandlordSearch = require('../validation/landlordSearch');
+const validateLandlordAdd = require('../validation/addLandlord');
 const validateMongoId = require('../validation/mongoId');
 
 const createLandlord = (req, res) => {
   const { body } = req;
+  const { errors, isValid } = validateLandlordAdd(body);
 
   if (!body) {
     return res.status(400).json({
@@ -11,24 +13,30 @@ const createLandlord = (req, res) => {
       error: 'You must provide a landlord',
     });
   }
+  if (isValid) {
+    const landlord = new Landlord(body);
 
-  const landlord = new Landlord(body);
-
-  landlord
-    .save()
-    .then(() =>
-      res.status(201).json({
-        success: true,
-        id: landlord._id,
-        message: 'Landlord created!',
-      }),
-    )
-    .catch(error =>
-      res.status(400).json({
-        error,
-        message: 'Landlord not created!',
-      }),
-    );
+    landlord
+      .save()
+      .then(() =>
+        res.status(201).json({
+          success: true,
+          id: landlord._id,
+          message: 'Landlord created!',
+        }),
+      )
+      .catch(error =>
+        res.status(400).json({
+          error,
+          message: 'Landlord not created!',
+        }),
+      );
+  } else {
+    res.status(400).json({
+      success: false,
+      error: errors,
+    });
+  }
 };
 
 const updateLandlord = async (req, res) => {
