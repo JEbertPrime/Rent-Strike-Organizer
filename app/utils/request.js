@@ -24,8 +24,10 @@ function checkStatus(response) {
     return response;
   }
 
-  const error = new Error(response.statusText);
+  const error = new Error(response.statusMessage);
   error.response = response;
+  error.status = response.status;
+  error.json = parseJSON(response);
   throw error;
 }
 /**

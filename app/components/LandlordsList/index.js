@@ -7,13 +7,19 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import LandlordListItem from 'containers/LandlordListItem';
 
 function LandlordsList({ loading, error, landlords, nav, display = 'block' }) {
+  console.log(error);
   if (nav) {
     if (loading) {
       return <List nav display={display} component={LoadingIndicator} />;
     }
-    if (error === 'Error: Not Found') {
+    if (error.status === 404) {
       const ErrorComponent = () => (
-        <ListItem item="We couldn't find your landlord. Add your landlord here!" />
+        <ListItem
+          item={[
+            "We couldn't find your landlord.",
+            <a href="landlords/add"> Add your landlord here!</a>,
+          ]}
+        />
       );
       return <List nav display={display} component={ErrorComponent} />;
     }
@@ -38,9 +44,14 @@ function LandlordsList({ loading, error, landlords, nav, display = 'block' }) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
-  if (error === 'Error: Not Found') {
+  if (error.status == 404) {
     const ErrorComponent = () => (
-      <ListItem item="We couldn't find your landlord. Add your landlord here!" />
+      <ListItem
+        item={[
+          "We couldn't find your landlord.",
+          <a href="landlords/add"> Add your landlord here!</a>,
+        ]}
+      />
     );
     return <List component={ErrorComponent} />;
   }

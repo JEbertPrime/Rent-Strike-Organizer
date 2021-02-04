@@ -23,9 +23,12 @@ export const ADD_LANDLORD_SUCCESS =
   'rent-strike-organizer/App/ADD_LANDLORD_SUCCESS';
 export const ADD_LANDLORD_ERROR =
   'rent-strike-organizer/App/ADD_LANDLORD_ERROR';
-export const LOGIN = 'rent-strike-organizer/LoginPage/LOGIN';
-export const LOGIN_SUCCESS = 'rent-strike-organizer/LoginPage/LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'rent-strike-organizer/LoginPage/LOGIN_FAILURE';
-export const SET_USER = 'rent-strike-organizer/LoginPage/SET_USER';
-export const LOGOUT = 'rent-strike-organizer/LoginPage/LOGOUT';
-export const LOGOUT_SUCCESS = 'rent-strike-organizer/LoginPage/LOGOUT_SUCCESS';
+export const LOGIN = 'rent-strike-organizer/App/LOGIN';
+export const LOGIN_SUCCESS = 'rent-strike-organizer/App/LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'rent-strike-organizer/App/LOGIN_FAILURE';
+export const REGISTER = 'rent-strike-organizer/App/LOGIN';
+export const REGISTER_SUCCESS = 'rent-strike-organizer/App/LOGIN_SUCCESS';
+export const REGISTER_ERROR = 'rent-strike-organizer/App/LOGIN_FAILURE';
+export const SET_USER = 'rent-strike-organizer/App/SET_USER';
+export const LOGOUT = 'rent-strike-organizer/App/LOGOUT';
+export const LOGOUT_SUCCESS = 'rent-strike-organizer/App/LOGOUT_SUCCESS';

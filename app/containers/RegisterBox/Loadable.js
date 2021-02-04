@@ -1,4 +1,4 @@
-/* Asynchronously loads the component for LoginBox
+/* Asynchronously loads the component for RegisterBox
  */
 
 import React from 'react';

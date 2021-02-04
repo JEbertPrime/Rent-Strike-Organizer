@@ -1,5 +1,5 @@
 /*
- * LoginBox Actions
+ * Register Actions
  *
  * Actions change things in your application
  * Since this boilerplate uses a uni-directional data flow, specifically redux,
@@ -15,17 +15,29 @@
  *    }
  */
 
-import { CHANGE_USER, CHANGE_PASSWORD, CHANGE_EMAIL } from './constants';
+import {
+  CHANGE_NEW_USER,
+  CHANGE_PASSWORD_ONE,
+  CHANGE_PASSWORD_TWO,
+  CHANGE_EMAIL,
+  CHANGE_NAME,
+} from './constants';
 
-export function changeUser(user) {
+export function changeNewUser(newUser) {
   return {
-    type: CHANGE_USER,
-    user,
+    type: CHANGE_NEW_USER,
+    newUser,
   };
 }
-export function changePassword(password) {
+export function changePasswordOne(password) {
   return {
-    type: CHANGE_PASSWORD,
+    type: CHANGE_PASSWORD_ONE,
+    password,
+  };
+}
+export function changePasswordTwo(password) {
+  return {
+    type: CHANGE_PASSWORD_TWO,
     password,
   };
 }
@@ -33,5 +45,11 @@ export function changeEmail(email) {
   return {
     type: CHANGE_EMAIL,
     email,
+  };
+}
+export function changeName(name) {
+  return {
+    type: CHANGE_NAME,
+    name,
   };
 }

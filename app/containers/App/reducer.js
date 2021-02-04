@@ -18,6 +18,7 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  REGISTER_ERROR,
   LOGOUT,
 } from './constants';
 
@@ -74,9 +75,14 @@ const appReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = action.error;
         break;
+      case REGISTER_ERROR:
+        draft.loading = false;
+        draft.error = action.error;
+        break;
       case LOGOUT:
         draft.userToken = undefined;
         draft.isAuth = false;
+        break;
     }
   });
 
