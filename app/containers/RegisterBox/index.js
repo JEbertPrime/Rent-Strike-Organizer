@@ -19,11 +19,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import styled from 'styled-components';
 // Components imports
 import LoadingIndicator from 'components/LoadingIndicator';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import ErrorMessage from 'components/ErrorMessage';
 import { register } from 'containers/App/actions';
 import Form from './Form';
 import saga from './saga';
@@ -36,14 +36,7 @@ import {
 } from './actions';
 import { makeSelectNewUser } from './selectors';
 const key = 'register';
-const ErrorMessage = styled.p`
-  font-size: 0.9rem;
-  color: red;
-  background-color: rgba(255, 255, 255, 1);
-  border: 1px solid black;
-  padding: 5px;
-  margin-top: 0px;
-`;
+
 export function RegisterBox({
   loading,
   error,

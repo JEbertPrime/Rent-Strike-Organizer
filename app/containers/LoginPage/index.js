@@ -9,7 +9,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 import LoginBox from 'containers/LoginBox/Loadable';
 import RegisterBox from 'containers/RegisterBox/Loadable';
 
@@ -21,6 +21,9 @@ const LoginPageWrapper = styled.div`
   padding: 0 16px;
   flex-direction: column;
 `;
+const RegisterMessage = styled.p`
+  margin: auto;
+`;
 export default function LoginPage(props) {
   const { item } = props;
   let content = <LoginPageWrapper />;
@@ -28,6 +31,9 @@ export default function LoginPage(props) {
     content = (
       <LoginPageWrapper>
         <LoginBox />
+        <RegisterMessage>
+          Need to create an account?<Link to="/register"> Register here.</Link>{' '}
+        </RegisterMessage>
       </LoginPageWrapper>
     );
   }

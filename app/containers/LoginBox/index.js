@@ -11,10 +11,10 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { Redirect } from 'react-router';
 import {
   // makeSelectLoading,
-  // makeSelectError,
+  makeSelectError,
   makeSelectToken,
 } from 'containers/App/selectors';
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -23,6 +23,7 @@ import { createStructuredSelector } from 'reselect';
 import H1 from 'components/H1';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import ErrorMessage from 'components/ErrorMessage';
 import { login } from 'containers/App/actions';
 import Form from './Form';
 import saga from './saga';
@@ -33,13 +34,14 @@ const key = 'login';
 
 export function LoginBox({
   // loading,
-  // error,
+  error,
   user,
   token,
   onSubmitForm,
   onChangeEmail,
   onChangePassword,
 }) {
+  const [errors, setErrors] = useState({});
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -53,6 +55,7 @@ export function LoginBox({
           value={user.email}
           onChange={onChangeEmail}
         />
+        {errors.email ? <ErrorMessage>{errors.email}</ErrorMessage> : <div />}
         <Input
           id="password"
           type="password"
@@ -60,12 +63,21 @@ export function LoginBox({
           value={user.password}
           onChange={onChangePassword}
         />
+        {errors.password ? (
+          <ErrorMessage>{errors.password}</ErrorMessage>
+        ) : (
+          <div />
+        )}
         <Button type="submit">Login</Button>
       </Form>
       <H1 />
     </div>
   );
-
+  if (error) {
+    error.json.then(value => {
+      setErrors(value);
+    });
+  }
   // When user is authenticated, push to home page
   if (token) {
     content = <Redirect to="" />;
@@ -85,7 +97,7 @@ LoginBox.propTypes = {
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
   // loading: makeSelectLoading(),
-  // error: makeSelectError(),
+  error: makeSelectError(),
   token: makeSelectToken(),
 });
 export function mapDispatchToProps(dispatch) {
