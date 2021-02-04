@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Input as input} from 'reactstrap';
+import { Input as input } from 'reactstrap';
 
 const Input = styled(input)`
   font-size: 2rem;

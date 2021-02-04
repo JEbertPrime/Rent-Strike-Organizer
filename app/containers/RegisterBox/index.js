@@ -40,9 +40,9 @@ const ErrorMessage = styled.p`
   font-size: 0.9rem;
   color: red;
   background-color: rgba(255, 255, 255, 1);
-border: 1px solid black;
-padding: 5px;
-margin-top: 0px;
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 0px;
 `;
 export function RegisterBox({
   loading,
@@ -69,7 +69,7 @@ export function RegisterBox({
           value={newUser.email}
           onChange={onChangeEmail}
         />
-          { errors.email ? <ErrorMessage>{errors.email}</ErrorMessage> : <div></div>  }
+        {errors.email ? <ErrorMessage>{errors.email}</ErrorMessage> : <div />}
         <Input
           id="name"
           type="text"
@@ -77,7 +77,7 @@ export function RegisterBox({
           value={newUser.name}
           onChange={onChangeName}
         />
-        {errors.name ? <ErrorMessage>{errors.name}</ErrorMessage> : <div></div>  }
+        {errors.name ? <ErrorMessage>{errors.name}</ErrorMessage> : <div />}
         <Input
           id="password1"
           type="password"
@@ -85,7 +85,11 @@ export function RegisterBox({
           value={newUser.passwordOne}
           onChange={onChangePasswordOne}
         />
-        {errors.password ? <ErrorMessage>{errors.password}</ErrorMessage> : <div></div>  }
+        {errors.password ? (
+          <ErrorMessage>{errors.password}</ErrorMessage>
+        ) : (
+          <div />
+        )}
         <Input
           id="password2"
           type="password"
@@ -93,7 +97,11 @@ export function RegisterBox({
           value={newUser.passwordTwo}
           onChange={onChangePasswordTwo}
         />
-                  {errors.password2 ? <ErrorMessage>{errors.password2}</ErrorMessage> : <div></div>  }
+        {errors.password2 ? (
+          <ErrorMessage>{errors.password2}</ErrorMessage>
+        ) : (
+          <div />
+        )}
 
         <Button type="submit">Register</Button>
       </Form>
