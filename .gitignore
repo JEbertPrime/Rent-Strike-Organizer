@@ -8,3 +8,5 @@ keys.js
 .DS_Store
 npm-debug.log
 .idea
+server/config-copy/passport.js
+server/config/passport.js
