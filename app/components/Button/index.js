@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import {Button as button} from 'reactstrap'
 
-const Button = styled.button`
-  font-size: 1.4rem;
-  width: 10em;
+const Button = styled(button)`
+  font-size: 1rem;
+width: auto;
+  max-width: 10em;
   margin: auto;
 `;
 

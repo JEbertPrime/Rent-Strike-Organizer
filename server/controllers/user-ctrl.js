@@ -29,12 +29,32 @@ const createUser = (req, res) => {
         newUser.password = hash;
         newUser
           .save()
-          .then(user => res.json(user))
+          .then(user => {
+            const payload = {
+          id: user.id,
+          name: user.name,
+          landlord: user.landlord,
+        };
+        // Sign token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          {
+            expiresIn: 31556926, // 1 year in seconds
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: `Bearer ${token}`,
+            });
+          },
+        );
+        })
           .catch(err => console.log(err));
       });
     });
+      
   });
-  return res.status(200).json({ success: true });
 };
 const login = (req, res) => {
   // Form validation

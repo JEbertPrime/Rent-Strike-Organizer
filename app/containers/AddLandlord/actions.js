@@ -16,40 +16,48 @@
  */
 
 import {
-  CHANGE_NEW_USER,
-  CHANGE_PASSWORD_ONE,
-  CHANGE_PASSWORD_TWO,
-  CHANGE_EMAIL,
+  CHANGE_NEW_LANDLORD,
   CHANGE_NAME,
+  CHANGE_TYPE,
+  CHANGE_LOCATION,
+    ADD_LANDLORD_ERROR
 } from './constants';
 
-export function changeNewUser(newUser) {
+export function changeNewLandlord(newLandlord) {
   return {
-    type: CHANGE_NEW_USER,
-    newUser,
-  };
-}
-export function changePasswordOne(password) {
-  return {
-    type: CHANGE_PASSWORD_ONE,
-    password,
-  };
-}
-export function changePasswordTwo(password) {
-  return {
-    type: CHANGE_PASSWORD_TWO,
-    password,
-  };
-}
-export function changeEmail(email) {
-  return {
-    type: CHANGE_EMAIL,
-    email,
+    type: CHANGE_NEW_LANDLORD,
+    newLandlord,
   };
 }
 export function changeName(name) {
   return {
     type: CHANGE_NAME,
     name,
+  };
+}
+
+export function changeType(landlordType) {
+  return {
+    type: CHANGE_TYPE,
+    landlordType,
+  };
+}
+export function changeLocation(location) {
+  return {
+    type: CHANGE_LOCATION,
+    location,
+  };
+}
+/**
+ * Dispatched when adding the landlord fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of ADD_LANDLORD_ERROR passing the error
+ */
+export function landlordAddingError(error) {
+  return {
+    type: ADD_LANDLORD_ERROR,
+    error,
   };
 }

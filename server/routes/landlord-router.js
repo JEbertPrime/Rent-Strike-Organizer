@@ -4,7 +4,7 @@ const LandlordCtrl = require('../controllers/landlord-ctrl');
 
 const router = express.Router();
 
-router.post('/landlord', LandlordCtrl.createLandlord);
+router.post('/landlord/add', LandlordCtrl.createLandlord);
 router.put('/landlord/:id', LandlordCtrl.updateLandlord);
 router.delete('/landlord/:id', LandlordCtrl.deleteLandlord);
 router.get('/landlord/:id', LandlordCtrl.getLandlordById);

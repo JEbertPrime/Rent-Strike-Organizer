@@ -9,10 +9,8 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const CHANGE_NEW_USER = 'rent-strike-organizer/Register/CHANGE_NEW_USER';
-export const CHANGE_NAME = 'rent-strike-organizer/Register/CHANGE_NAME';
-export const CHANGE_EMAIL = 'rent-strike-organizer/Register/CHANGE_EMAIL';
-export const CHANGE_PASSWORD_ONE =
-  'rent-strike-organizer/Register/CHANGE_PASSWORD_ONE';
-export const CHANGE_PASSWORD_TWO =
-  'rent-strike-organizer/Register/CHANGE_PASSWORD_TWO';
+export const CHANGE_NEW_LANDLORD = 'rent-strike-organizer/AddLandlord/CHANGE_NEW_LANDLORD';
+export const CHANGE_NAME = 'rent-strike-organizer/AddLandlord/CHANGE_NAME';
+export const CHANGE_TYPE = 'rent-strike-organizer/AddLandlord/CHANGE_TYPE';
+export const CHANGE_LOCATION = 'rent-strike-organizer/AddLandlord/CHANGE_LOCATION';
+export const ADD_LANDLORD_ERROR ='rent-strike-organizer/AddLandlord/ADD_LANDLORD_ERROR';

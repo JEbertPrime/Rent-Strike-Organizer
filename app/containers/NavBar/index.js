@@ -69,8 +69,18 @@ export function NavBar({
   useEffect(() => {
     // When initial state username is not null, submit the form to load repos
   }, []);
-
-  const user = isAuth ? jwtDecode(userToken) : undefined;
+    var user
+  if(isAuth){
+           try { 
+                user = jwtDecode(userToken)
+           } catch (error)
+           {
+                user = undefined
+               console.log('poop')
+           }
+       }else{
+            user = undefined
+       } 
   const landlordListRef = useRef(null);
   const [displayList, setDisplay] = useState(true);
   useOutsideCheck(landlordListRef, setDisplay);
@@ -111,7 +121,7 @@ export function NavBar({
               {...landlordsListProps}
             />
           </SearchWrapper>
-          {isAuth ? (
+          {user ? (
             <UserNav user={user} />
           ) : (
             <NavLink

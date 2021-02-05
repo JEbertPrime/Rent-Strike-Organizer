@@ -14,6 +14,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LandlordPage from 'containers/LandlordPage/Loadable';
+import AddLandlord from 'containers/AddLandlord/Loadable';
 import NavBar from 'containers/NavBar/Loadable';
 import GlobalStyle from '../../global-styles';
 function getRandomInt(max) {
@@ -25,6 +26,7 @@ export default function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path= "/landlords/add" component={AddLandlord} />
         <Route exact path="/landlords/:id" component={LandlordPage} />
         <Route
           exact

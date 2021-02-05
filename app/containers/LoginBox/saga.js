@@ -34,7 +34,6 @@ export function* getUserToken() {
     const user = yield call(request, requestURL, options);
     const { token } = user;
     localStorage.setItem('jwtToken', token);
-    console.log(user);
     yield put(loginSuccess(user.token));
   } catch (err) {
     yield put(loginError(err));

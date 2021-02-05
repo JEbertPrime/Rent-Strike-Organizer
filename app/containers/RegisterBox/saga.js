@@ -37,41 +37,15 @@ export function* sendRegistration() {
 
   try {
     // Call our request helper (see 'utils/request')
-    const res = yield call(request, requestURL, options);
-    console.log(res);
-    yield call(getUserToken);
+    const user = yield call(request, requestURL, options);
+      const { token } = user;
+    localStorage.setItem('jwtToken', token);
+      yield put(loginSuccess(user.token));
   } catch (err) {
     yield put(registerError(err));
   }
 }
-export function* getUserToken() {
-  // Select username from store
-  const user = yield select(getUser);
-  console.log(user);
-  const requestURL = `/api/user/login`;
-  const data = {
-    email: user.email,
-    password: user.passwordOne,
-  };
-  const options = {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'content-type': 'application/json',
-    },
-  };
 
-  try {
-    // Call our request helper (see 'utils/request')
-    const user = yield call(request, requestURL, options);
-    const { token } = user;
-    localStorage.setItem('jwtToken', token);
-    console.log(user);
-    yield put(loginSuccess(user.token));
-  } catch (err) {
-    yield put(loginError(err));
-  }
-}
 
 /**
  * Root saga manages watcher lifecycle

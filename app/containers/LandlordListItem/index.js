@@ -33,7 +33,7 @@ export function LandlordListItem(props) {
 }
 
 ListItem.propTypes = {
-  item: PropTypes.object,
+ item: PropTypes.oneOf[(PropTypes.array, PropTypes.object)],
   currentSearch: PropTypes.string,
 };
 

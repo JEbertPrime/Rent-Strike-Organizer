@@ -12,6 +12,9 @@ module.exports = function validateLandlordAdd(input) {
   if (Validator.isEmpty(data.name)) {
     errors.name = 'Name field is required';
   }
+    if (!/^[ a-zA-Z\-\’]+$/.test(data.name)) {
+    errors.name = 'Name must be Alphanumeric. Hyphens and Apostraphes allowed.';
+  }
   // Type checks
   if (Validator.isEmpty(data.type)) {
     errors.type = 'Type field is required';
@@ -19,8 +22,8 @@ module.exports = function validateLandlordAdd(input) {
     errors.type = 'Type must be landlord or property manager';
   }
   // Location checks
-  if (!Validator.isAlphanumeric(data.location)) {
-    errors.location = 'Location field must be alphanumeric characters only';
+  if (!/^[ a-zA-Z\-\’]+$/.test(data.location)) {
+    errors.location = 'Location field must be alphanumeric. Hyphens and Apostraphes allowed.';
   }
   if (Validator.isEmpty(data.location)) {
     errors.location = 'Location field is required';

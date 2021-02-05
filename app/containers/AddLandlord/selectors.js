@@ -5,37 +5,20 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectRegister = state => state.register || initialState;
+const selectAddLandlord = state => state.addLandlord || initialState;
 
-const makeSelectEmail = () =>
+const makeSelectNewLandlord = () =>
   createSelector(
-    selectRegister,
-    registerState => registerState.newUser.email,
+    selectAddLandlord,
+    addLandlordState => addLandlordState.newLandlord,
   );
-const makeSelectName = () =>
-  createSelector(
-    selectRegister,
-    registerState => registerState.newUser.name,
-  );
-const makeSelectPasswordOne = () =>
-  createSelector(
-    selectRegister,
-    registerState => registerState.newUser.passwordOne,
-  );
-const makeSelectPasswordTwo = () =>
-  createSelector(
-    selectRegister,
-    registerState => registerState.newUser.passwordTwo,
-  );
-const makeSelectNewUser = () =>
-  createSelector(
-    selectRegister,
-    registerState => registerState.newUser,
-  );
+const makeSelectError = () =>
+    createSelector(
+        selectAddLandlord,
+        addLandlordState => addLandlordState.error
+    )
 export {
-  makeSelectEmail,
-  makeSelectName,
-  makeSelectPasswordOne,
-  makeSelectPasswordTwo,
-  makeSelectNewUser,
+
+  makeSelectNewLandlord,
+    makeSelectError
 };

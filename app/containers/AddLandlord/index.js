@@ -21,31 +21,30 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 // Components imports
 import LoadingIndicator from 'components/LoadingIndicator';
-import Input from 'components/Input';
+import Input, {Label} from 'components/Input';
 import Button from 'components/Button';
+import {Wrapper, InlineWrapper as Inline} from './Wrappers.js'
 import ErrorMessage from 'components/ErrorMessage';
-import { register } from 'containers/App/actions';
+import { addLandlord } from 'containers/App/actions';
 import Form from './Form';
 import saga from './saga';
 import reducer from './reducer';
 import {
-  changeEmail,
-  changePasswordOne,
-  changePasswordTwo,
   changeName,
+  changeType,
+  changeLocation,
 } from './actions';
-import { makeSelectNewUser } from './selectors';
-const key = 'register';
+import { makeSelectNewLandlord } from './selectors';
+const key = 'addLandlord';
 
-export function RegisterBox({
+export function AddLandlord({
   loading,
   error,
-  newUser,
+  newLandlord,
   token,
   onSubmitForm,
-  onChangeEmail,
-  onChangePasswordOne,
-  onChangePasswordTwo,
+  onChangeType,
+  onChangeLocation,
   onChangeName,
 }) {
   const [errors, setErrors] = useState({});
@@ -53,52 +52,54 @@ export function RegisterBox({
   useInjectSaga({ key, saga });
   if (loading) content = <LoadingIndicator />;
   let content = (
-    <div>
+    <Wrapper>
       <Form onSubmit={onSubmitForm}>
-        <Input
-          id="email"
-          type="text"
-          placeholder="email"
-          value={newUser.email}
-          onChange={onChangeEmail}
-        />
-        {errors.email ? <ErrorMessage>{errors.email}</ErrorMessage> : <div />}
         <Input
           id="name"
           type="text"
-          placeholder="username"
-          value={newUser.name}
+          placeholder="Landlord Name"
+          value={newLandlord.name}
           onChange={onChangeName}
         />
         {errors.name ? <ErrorMessage>{errors.name}</ErrorMessage> : <div />}
-        <Input
-          id="password1"
-          type="password"
-          placeholder="password"
-          value={newUser.passwordOne}
-          onChange={onChangePasswordOne}
+      <Inline>
+        
+        <Label> 
+            <Input
+          type="radio"
+                checked={newLandlord.landlordType === 'landlord'}
+          value="landlord"
+                
+          onChange={onChangeType}
         />
-        {errors.password ? (
-          <ErrorMessage>{errors.password}</ErrorMessage>
-        ) : (
-          <div />
-        )}
+            Landlord</Label>
+
+      
+        <Label><Input
+          type="radio"
+          checked={newLandlord.landlordType === 'property manager'}
+          value='property manager'
+          onChange={onChangeType}
+        />Property Manager</Label>
+
+        {errors.type ? <ErrorMessage>{errors.type}</ErrorMessage> : <div />}
+        </Inline>
         <Input
-          id="password2"
-          type="password"
-          placeholder="password"
-          value={newUser.passwordTwo}
-          onChange={onChangePasswordTwo}
+          id="location"
+          type="location"
+          placeholder="Landlord Location"
+          value={newLandlord.location}
+          onChange={onChangeLocation}
         />
-        {errors.password2 ? (
-          <ErrorMessage>{errors.password2}</ErrorMessage>
+        {errors.location ? (
+          <ErrorMessage>{errors.location}</ErrorMessage>
         ) : (
           <div />
         )}
 
-        <Button type="submit">Register</Button>
+        <Button type="submit">Add Landlord</Button>
       </Form>
-    </div>
+    </Wrapper>
   );
   if (error) {
     error.json.then(value => {
@@ -106,46 +107,45 @@ export function RegisterBox({
     });
   }
   // When user is authenticated, push to home page
-  if (token) {
-    content = <Redirect to="" />;
-  }
+
   return content;
 }
-RegisterBox.propTypes = {
+AddLandlord.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  newUser: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  newLandlord: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   token: PropTypes.string,
   onSubmitForm: PropTypes.func,
-  onChangePasswordOne: PropTypes.func,
-  onChangePasswordTwo: PropTypes.func,
-  onChangeEmail: PropTypes.func,
   onChangeName: PropTypes.func,
+  onChangeType: PropTypes.func,
+  onChangeLocation: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  newUser: makeSelectNewUser(),
+  newLandlord: makeSelectNewLandlord(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
   token: makeSelectToken(),
 });
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangePasswordOne: evt => {
-      dispatch(changePasswordOne(evt.target.value));
-    },
-    onChangePasswordTwo: evt => {
-      dispatch(changePasswordTwo(evt.target.value));
-    },
-    onChangeEmail: evt => {
-      dispatch(changeEmail(evt.target.value));
-    },
     onChangeName: evt => {
       dispatch(changeName(evt.target.value));
     },
+    onChangeType: evt => {
+        if(evt.target.checked) {
+            console.log(evt.target.checked)
+       dispatch(changeType(evt.target.value));
+    }
+      
+        
+    },
+    onChangeLocation: evt => {
+      dispatch(changeLocation(evt.target.value));
+    },
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(register());
+      dispatch(addLandlord());
     },
   };
 }
@@ -158,4 +158,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(RegisterBox);
+)(AddLandlord);

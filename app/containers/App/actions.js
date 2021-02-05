@@ -9,6 +9,7 @@ import {
   LOAD_LANDLORD,
   LOAD_LANDLORD_SUCCESS,
   LOAD_LANDLORD_ERROR,
+    ADD_LANDLORD,
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
@@ -74,10 +75,10 @@ export function loadLandlordById(id) {
 /**
  * Dispatched when the landlord is loaded by the request saga
  *
- * @param  {array} landlord The landlord data
+ * @param  {object} landlord The landlord data
  * @param  {string} id The landlord id
  *
- * @return {object}      An action object with a type of LOAD_LANDLORD_SUCCESS passing the repos
+ * @return {object}      An action object with a type of LOAD_LANDLORD_SUCCESS passing the landlord and id
  */
 export function landlordLoadedById(landlord, id) {
   return {
@@ -100,6 +101,33 @@ export function landlordLoadingByIdError(error) {
     error,
   };
 }
+/**
+ * Dispatched when adding a new landlord to the database
+ *
+ * @param  {object} landlord The landlord
+ *
+ * @return {object}       An action object with a type of ADD_LANDLORD passing the landlord
+ */
+export function addLandlord(landlord){
+    return {
+        type: ADD_LANDLORD,
+        landlord,
+    };
+}
+/**
+ * Dispatched when the landlord is added by the request saga
+ *
+ * @param  {string} id The landlord id
+ *
+ * @return {object}      An action object with a type of ADD_LANDLORD_SUCCESS passing the landlord
+ */
+export function landlordAdded(id) {
+  return {
+    type: ADD_LANDLORD_SUCCESS,
+    id,
+  };
+}
+
 
 /**
  * Dispatched when logging in, starts the request saga
