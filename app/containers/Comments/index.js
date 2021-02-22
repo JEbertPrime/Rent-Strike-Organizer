@@ -15,14 +15,14 @@ import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import {
   makeSelectLoading,
-  makeSelectError,
+  // makeSelectError,
   makeSelectLandlord,
 } from 'containers/App/selectors';
 import { loadLandlordById } from 'containers/App/actions';
 // Components imports
 import { LandlordInfoCard } from 'containers/LandlordInfoCard';
 import { makeSelectId } from './selectors';
-import { addComment } from './actions';
+// import { addComment } from './actions';
 import saga from './saga';
 import reducer from './reducer';
 const key = 'landlord';
@@ -39,11 +39,11 @@ const LandlordPageWrapper = styled.div`
 
 export function LandlordPage({
   loading,
-  error,
+  // error,
   landlord,
   id,
   getLandlordData,
-  submitComment,
+  // submitComment,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -51,25 +51,23 @@ export function LandlordPage({
   useEffect(() => {
     getLandlordData(id);
   }, [id]);
-  var content = ( <LandlordPageWrapper>
-    <LandlordInfoCard landlord={landlord} loading={loading} />
-  </LandlordPageWrapper>)
   return (
-    content
+    <LandlordPageWrapper>
+      <LandlordInfoCard landlord={landlord} loading={loading} />
+    </LandlordPageWrapper>
   );
 }
 LandlordPage.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  // error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   landlord: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   id: PropTypes.string,
   getLandlordData: PropTypes.func,
-  comments: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
-  error: makeSelectError(),
+  // error: makeSelectError(),
   id: makeSelectId(),
   landlord: makeSelectLandlord(),
 });

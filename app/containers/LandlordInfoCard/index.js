@@ -1,7 +1,9 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable indent */
 /**
- * RepoListItem
+ * LandlordInfoCard
  *
- * Lists the name and the issue count of a repository
+ * Lists basic info of a landlord
  */
 
 import React from 'react';
@@ -21,7 +23,7 @@ export function LandlordInfoCard({ landlord, loading }) {
       landlord.location.length > 1
         ? `${landlord.location
           .slice(0, -1)
-          .join(', ')} and ${landlord.location.slice(-1)}`
+            .join(', ')} and ${landlord.location.slice(-1)}`
         : landlord.location;
     content = (
       <Wrapper>
